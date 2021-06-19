@@ -1,0 +1,110 @@
+1. 初始化一个仓库 
+cd /e/gitTest
+$ git init
+在文件夹中会生成一个.git的文件， 这个就是版本库， gitTest文件夹就是工作区
+2. 对文件进行版本控制 首先添加文件到暂存区
+$ git add 精确地将内容添加到下一次提交中
+3. 检查当前文件状态
+git status
+简短输出详情
+git status -s 
+放弃修改
+git checkout -- 文件名 
+查看没有add的改动
+git diff 
+git add -A 将所有文件添加到暂存区
+git commit -a 将所有跟踪的文件添加到暂存区， 免去了git add
+git commit -m 提交的内容简述
+删除文件
+git rm 
+删除修改过的文件 需要强制删除
+git rm 文件名 -f
+从暂存区删除 不删除文件
+git rm --cached xxx文件名 xxx文件名
+
+移动文件
+git mv c.txt b.txt
+
+查看提交日志
+git log 
+
+查看每次提交的简略统计信息
+git log --stat 
+
+这个命令会将暂存区的文件提交，如果自上次提交后为做任何修改
+（例如在上次提交后马上执行了此命令，那么快照会保持不变，修改的只是提交信息）
+文本编辑器启动后，可以看到之前的提交信息。 编辑后保存会覆盖原来的提交信息。
+git commit --amend
+例如，你提交后发现忘记了暂存某些需要的修改，可以像下面这样操作：
+$ git commit -m 'initial commit'
+$ git add forgotten_file
+$ git commit --amend
+最终你只会有一个提交——第二次提交将代替第一次提交的结果。
+
+取消文件暂存
+git reset HEAD <file>
+取消对文件的修改,恢复到上次提交（危险操作）
+git checkout -- <file>
+查看远程仓库
+git remote -v
+查看某一个远程仓库的信息
+git remote show <remote>
+eg: git remote show origin
+推送到远程仓库
+git push <remote> <branch>
+当你想要将 master 分支推送到 origin 服务器时
+eg: git push origin master
+
+远程仓库的重命名与移除
+git remote rename
+$ git remote rename pb paul
+$ git remote
+origin
+paul
+
+$ git remote remove paul
+$ git remote
+origin
+
+列出标签
+$ git tag 可带上可选的 -l 选项 --list
+通配符查询vl.8.5开头的
+$ git tag -l "v1.8.5*"
+v1.8.5
+v1.8.5-rc0
+
+创建标签：
+附注标签就是有附加注释的标签
+eg: git tag -a v1.0 -m my version 1.0
+通过git show 可以查看标签信息和与之对应的提交信息
+$ git show v1.0
+
+轻量标签 没有-a
+$ git tag v1.1
+在标签上运行git show 不会看到额外的标签信息。只有提交信息
+
+删除标签 并push
+$ git tag -d v1.4-lw
+$ git push origin :refs/tags/v1.4-lw
+
+检出标签
+$ git checkout v1.0
+
+
+git切换到某个tag, 从tag切换回当前分支
+直接使用命令git checkout test 分支，出现以下错误
+error: pathspec 'origin/XXX' did not match any file(s) known to git.
+项目上有一个分支test，使用git branch -a看不到该远程分支，直接使用命令git checkout test报错如下：
+解决方法是：
+1、执行命令git fetch取回所有分支的更新
+
+2、执行git branch -a可以看到test分支（已经更新分支信息）
+
+3、切换分支git checkout test
+
+新建分支并切换
+$ git checkout -b <branchName>
+是下面两条命令的简写
+$ git branch <branchName>
+$ git checkout <branchName>
+
