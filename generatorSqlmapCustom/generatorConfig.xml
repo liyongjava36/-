@@ -5,6 +5,7 @@
 
 <generatorConfiguration>
 	<context id="testTables" targetRuntime="MyBatis3">
+	
 		<commentGenerator>
 			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
 			<property name="suppressAllComments" value="true" />
@@ -25,6 +26,7 @@
 		<javaTypeResolver>
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
+		
 
 		<!-- targetProject:生成PO类的位置 -->
 		<javaModelGenerator targetPackage="com.pinyougou.pojo"
@@ -75,4 +77,5 @@
 			<columnOverride column="" javaType="" />
 		</table> -->
 	</context>
+	
 </generatorConfiguration>
